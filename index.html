@@ -3,11 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>iplanit app</title>
-    <link rel="stylesheet" href="./assets/styles.css/styles.css">
+    <title>iplan it App</title>
+    <link rel="stylesheet" href="./assets/css/styles.css">
   </head>
   <body>
-    <h1>iplanit app</h1>
+    <!-- Header section -->
+    <header>
+      <h1>iplan it App</h1>
+    </header>
+
+    <main>
+      <!-- Search section -->
+      <section id="search-section" class="search-section">
+        <label for="search-input" class="input-label">Search Your Next Destination</label>
+        <div class="input-container">
+          <input type="text" id="search-input" placeholder="Enter Country name...">
+          <button id="search-btn">SEARCH</button>
+        </div>
+      </section>
+
+      <!-- Results section -->
+      <section id="results-section" class="results-section">
+        <div class="results-container">
+          <!-- Results will be injected here -->
+        </div>
+      </section>
+    </main>
+
+    <!-- footer section -->
+    <footer>
+      <p class="copy-right">&copy; 2025 iplan it | All Rights Reserved.</p>
+    </footer>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
