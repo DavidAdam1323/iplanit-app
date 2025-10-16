@@ -51,20 +51,46 @@ function countryData(countryName) {
       } return response.json()
     })
     .then((data) => {
+      const country = data[0];
+      displayResults(country)
+
       console.log("data:", data[0]);
-      console.log("Flag:", data[0].flag);
-      console.log("Country name: ", data[0].name.common);
-      console.log("Official name: ", data[0].name.official);
-      console.log("Capital: ", data[0].capital[0]);
-      console.log("Population: ", data[0].population);
-      console.log("Region:", data[0].region);
-      console.log("Languages:", Object.values(data[0].languages || {}).join(", "));
-      console.log("Currency:", Object.values(data[0].currencies || {}).map(c => `${c.name} (${c.symbol})`).join(", "));
+      // console.log("Flag:", data[0].flag);
+      // console.log("Country name: ", data[0].name.common);
+      // console.log("Official name: ", data[0].name.official);
+      // console.log("Capital: ", data[0].capital[0]);
+      // console.log("Population: ", data[0].population);
+      // console.log("Region:", data[0].region);
+      // console.log("Languages:", Object.values(data[0].languages || {}).join(", "));
+      // console.log("Currency:", Object.values(data[0].currencies || {}).map(c => `${c.name} (${c.symbol})`).join(", "));
 
       input.value = "";
-      return data[0]
+      return country
     })
     .catch((error) => console.error("Error fetching country data.", error))
 }
 
 // countryData("Italy")
+
+// Display results
+function displayResults(data) {
+  const resultsDiv = document.querySelector(".results-container");
+  const countryInfo = data;
+
+  let html = `
+    <div class="card-results">
+      <h2>${countryInfo.name.common}</h2>
+      <img src="${countryInfo.flags.png}" alt="${countryInfo.name.common} flag" />
+      <div class="card-info">
+        <h3>Basic Information</h3>
+        <p><strong>Official Name:</strong> ${countryInfo.name.official}</p>
+        <p><strong>Capital:</strong> ${countryInfo.capital[0]}</p>
+        <p><strong>Region:</strong> ${countryInfo.region}</p>
+        <p><strong>Population:</strong> ${countryInfo.population}</p>
+        <p><strong>Language:</strong> ${Object.values(countryInfo.languages || {}).join(", ")}</p>
+        <p><strong>Currency:</strong> ${Object.values(countryInfo.currencies || {}).map((c) => { return `${c.name} (${c.symbol})`}).join(", ")}</p>
+      </div>
+    </div>
+  `
+  resultsDiv.innerHTML = html
+}
