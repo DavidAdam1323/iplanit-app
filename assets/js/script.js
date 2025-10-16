@@ -52,7 +52,10 @@ function countryData(countryName) {
     })
     .then((data) => {
       const country = data[0];
-      displayResults(country)
+
+      infoData(countryName).then((wikiData) => {
+        displayResults(country, wikiData);
+      });
 
       console.log("data:", data[0]);
       // console.log("Flag:", data[0].flag);
@@ -70,10 +73,27 @@ function countryData(countryName) {
     .catch((error) => console.error("Error fetching country data.", error))
 }
 
-// countryData("Italy")
+// Fetching Wikipedia info
+function infoData(countryName) {
+  return fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${countryName}`)
+  .then((response) => {
+    if(!response.ok) {
+      throw new Error("Information not found.")
+    } return response.json()
+  })
+  .then((data) => {
+    const wikiData = data;
+    // console.log(wikiData)
+    // console.log(wikiData.title)
+    // console.log(wikiData.extract_html)
+
+    return wikiData
+  })
+  .catch((error) => console.error("Error fetching info data.", error))
+}
 
 // Display results
-function displayResults(data) {
+function displayResults(data, wikiData) {
   const resultsDiv = document.querySelector(".results-container");
   const countryInfo = data;
 
@@ -89,6 +109,12 @@ function displayResults(data) {
         <p><strong>Population:</strong> ${countryInfo.population}</p>
         <p><strong>Language:</strong> ${Object.values(countryInfo.languages || {}).join(", ")}</p>
         <p><strong>Currency:</strong> ${Object.values(countryInfo.currencies || {}).map((c) => { return `${c.name} (${c.symbol})`}).join(", ")}</p>
+      </div>
+      <div>
+      <h3>Know Before You Go!</h3>
+      <div>
+        ${wikiData && wikiData.extract_html ? wikiData.extract_html : "<p>Description not available.</p>"}
+      </div>
       </div>
     </div>
   `
