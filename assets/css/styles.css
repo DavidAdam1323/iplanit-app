@@ -1,0 +1,43 @@
+/* reset styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+
+    /* set the height to 100% of the viewport height */
+    min-height: 100vh;
+}
+
+main { 
+    margin: 0 auto; 
+}
+
+#search-section {
+
+    /* set the background image to cover the entire section */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    text-align: center;
+    color: white;
+    height: 300px;
+    margin-bottom: 20px;
+
+    /* set the background image to /assets/images/beach.jpg */
+    background-image: url('../images/beach.jpg');
+}
+
+.results-section {
+    margin-top: 20px;
+}
